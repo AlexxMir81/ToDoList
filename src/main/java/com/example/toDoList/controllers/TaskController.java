@@ -21,21 +21,27 @@ public class TaskController {
         model.addAttribute("tasks", taskService.tasks());
         return "tasks";
     }
-    @GetMapping("/tasks/add")
+    @GetMapping("/task/add")
     public String taskAdd(Model model){
-        return "tasksAdd";
+        return "taskAdd";
     }
-    @PostMapping("/tasks/add")
+    @PostMapping("/task/add")
     public String taskAddPost(@RequestParam String title, @RequestParam String description,
         @RequestParam String startDate, @RequestParam String duration, Model model) throws ParseException {
         Task task = new Task(title, description, taskService.convertDate(startDate), Integer.parseInt(duration));
         taskService.taskAdd(task);
         return "redirect:/tasks";
     }
-    @GetMapping("/tasks/{id}")
+    @GetMapping("/task/{id}")
     public String tasksDetail(@PathVariable(value = "id") Long id, Model model){
         if(!(taskService.findById(id).size()>0)){return  "redirect:/tasks";};
         model.addAttribute("tasks", taskService.findById(id));
-        return "tasksDetail";
+        return "taskDetail";
+    }
+    @GetMapping("/task/{id}/edit")
+    public String tasksEdit(@PathVariable(value = "id") Long id, Model model){
+        if(!(taskService.findById(id).size()>0)){return  "redirect:/tasks";};
+        model.addAttribute("tasks", taskService.findById(id));
+        return "taskEdit.html";
     }
 }

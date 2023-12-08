@@ -19,8 +19,8 @@
                 <span class="badge bg-dark rounded-pill" th:text="${el.startDate}"></span>
                 <span class="badge bg-dark rounded-pill" th:text="'Длительность: ' + ${el.duration}"></span>
             </div>
-            <a th:href="'/tasks/'+${el.id}+'edit'" class="btn btn-dark mt-2">Редактировать</a>
-            <a th:href="'/tasks/'+${el.id}+'remove'" class="btn btn-dark mt-2">Удалить</a>
+            <a th:href="'/task/'+${el.id}+'/edit'" class="btn btn-dark mt-2">Редактировать</a>
+            <a th:href="'/task/'+${el.id}+'/remove'" class="btn btn-dark mt-2">Удалить</a>
         </li>
     </ol>
 </div>

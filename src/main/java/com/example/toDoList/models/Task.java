@@ -15,7 +15,7 @@ public class Task {
     private Long id;
     private String title;
     private String description;
-    @DateTimeFormat(pattern="dd-MMM-YYYY")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date startDate;
     private int duration;
 

@@ -44,4 +44,17 @@ public class TaskController {
         model.addAttribute("tasks", taskService.findById(id));
         return "taskEdit.html";
     }
+    @PostMapping("/task/{id}/edit")
+    public String tasksEdit(@PathVariable(value = "id") Long id,@RequestParam String title, @RequestParam String description,
+                              @RequestParam String startDate, @RequestParam String duration, Model model) throws ParseException {
+        if(!(taskService.findById(id).size()>0)){return  "redirect:/tasks";};
+        taskService.taskSave(id, title, description, startDate, duration);
+        return "redirect:/tasks";
+    }
+    @PostMapping("/task/{id}/remove")
+    public String tasksDelete(@PathVariable(value = "id") Long id, Model model) {
+        if(!(taskService.findById(id).size()>0)){return  "redirect:/tasks";};
+        taskService.taskDelete(id);
+        return "redirect:/tasks";
+    }
 }

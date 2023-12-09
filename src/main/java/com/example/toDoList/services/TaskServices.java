@@ -11,4 +11,6 @@ public interface TaskServices {
      void taskAdd(Task task);
      Date convertDate(String startDate) throws ParseException;
      ArrayList<Task> findById(Long id);
+     void taskSave(Long id, String title, String description, String startDate, String duration) throws ParseException ;
+     void taskDelete(Long id);
 }

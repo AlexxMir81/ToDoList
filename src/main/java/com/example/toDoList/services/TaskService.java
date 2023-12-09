@@ -5,6 +5,7 @@ import com.example.toDoList.repoiitoyies.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +32,21 @@ public class TaskService implements TaskServices{
         ArrayList<Task> tasks= new ArrayList<>();
         task.ifPresent(tasks::add);
         return tasks;
+    }
+
+    public void taskSave(Long id, String title, String description, String startDate, String duration) throws ParseException {
+        Task task = taskRepository.findById(id).orElseThrow();
+         task.setTitle(title);
+         task.setDescription(description);
+         task.setStartDate(convertDate(startDate));
+         task.setDuration(Integer.parseInt(duration));
+         taskRepository.save(task);
+    }
+
+    @Override
+    public void taskDelete(Long id) {
+        Task task = taskRepository.findById(id).orElseThrow();
+        taskRepository.delete(task);
     }
 
 

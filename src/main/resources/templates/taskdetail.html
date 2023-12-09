@@ -7,7 +7,7 @@
 </head>
 <body>
 <header th:insert="bloks/header :: header"></header>
-<div class="container m-2">
+<div class="container py-5">
     <h4>Подробное описание: </h4>
     <ol th:each="el: ${tasks}" class="list-group list-group-numbered">
         <li class="list-group-item justify-content-between align-items-start m-1">
@@ -16,11 +16,14 @@
                 <div th:text="${el.description}" class="fw-bold"></div>
             </div>
             <div>
-                <span class="badge bg-dark rounded-pill" th:text="${el.startDate}"></span>
+                <span class="badge bg-dark rounded-pill" th:text="${#dates.format(el.startDate, 'dd.MM.yyyy')}"></span>
                 <span class="badge bg-dark rounded-pill" th:text="'Длительность: ' + ${el.duration}"></span>
             </div>
             <a th:href="'/task/'+${el.id}+'/edit'" class="btn btn-dark mt-2">Редактировать</a>
-            <a th:href="'/task/'+${el.id}+'/remove'" class="btn btn-dark mt-2">Удалить</a>
+            <form th:action="'/task/'+${el.id}+'/remove'" method="post">
+                <button type="submit" class="btn btn-warning mt-2">Удалить</button>
+            </form>
+
         </li>
     </ol>
 </div>

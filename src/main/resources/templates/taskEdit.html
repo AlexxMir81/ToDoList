@@ -7,18 +7,18 @@
 </head>
 <body>
 <header th:insert="bloks/header :: header"></header>
-<div class="container m-5">
+<div class="container py-5">
     <h4>Редактирование залачи: </h4>
     <div th:each="el: ${tasks}">
         <form method="post">
             <input type="text" th:value="${el.title}" name="title" placeholder="Введите название задачи" class="form-control mb-2"/>
-            <textarea  name="description" th:text="${el.description}" placeholder="Введите описание задачи" class="form-control mb-2"/>
-            <input type="date" th:value="${el.startDate}" name="startDate" placeholder="Введите дату задачи" class="form-control mb-2"/>
+            <textarea name="description" th:text="${el.description}" placeholder="Введите описание задачи" class="form-control mb-2"/>
+            <input type="date" th:value="${#dates.format(el.startDate, 'yyyy-MM-dd')}" name="startDate" class="form-control mb-2"/>
+
             <input type="number" name="duration" th:value="${el.duration}" class="form-control mb-2"/>
             <button type="submit" class="btn btn-dark mb-2">Сохранить изменения</button>
         </form>
     </div>
-
 </div>
 
 <footer th:insert="bloks/footer :: footer"></footer>
